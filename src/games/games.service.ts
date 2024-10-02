@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Game } from './entities/game.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -16,11 +16,24 @@ export class GamesService {
   }
   async findById(id: string) {
     const game = await this.gamesRepository.findOne({ where: { id } });
-    if (!game) throw new Error('Game not found');
+    if (!game) throw new NotFoundException('Game not found');
     return game;
   }
 
-  create(dto: CreateGameDto) {
+  async create(dto: CreateGameDto) {
     return this.gamesRepository.save(dto);
+  }
+
+  async update(id: string, dto: CreateGameDto) {
+    const game = await this.gamesRepository.preload({
+      id: id,
+      ...dto,
+    });
+    return this.gamesRepository.save(game);
+  }
+
+  async remove(id: string) {
+    const game = await this.findById(id);
+    await this.gamesRepository.remove(game);
   }
 }

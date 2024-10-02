@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { GameGenres } from '../enums/games-genres.enum';
+import { User } from '../../users/entities/user.entity';
 
 @Entity()
 export class Game {
@@ -46,4 +47,7 @@ export class Game {
     default: () => 'now()',
   })
   updatedAt: Date;
+
+  @ManyToMany(() => User, (user) => user.favorites)
+  user: User[];
 }

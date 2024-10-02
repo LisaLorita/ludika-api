@@ -60,6 +60,8 @@ export class UsersController {
     return this.usersService.update(id, body);
   }
 
+  @ApiOperation({ summary: 'Delete user by id' })
+  @ApiBadRequestResponse({ status: 400, description: 'Bad Request' })
   @Delete(':id')
   removeUser(@Param('id', ParseUUIDPipe) id: string) {
     return this.usersService.remove(id);

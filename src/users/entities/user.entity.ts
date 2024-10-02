@@ -2,9 +2,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
+  ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Game } from '../../games/entities/game.entity';
 
 @Entity()
 export class User {
@@ -39,4 +42,13 @@ export class User {
     default: () => 'now()',
   })
   updatedAt: Date;
+
+  //Relacion tabla favoritos
+  @ManyToMany(() => Game, { cascade: true })
+  @JoinTable({
+    name: 'favorites',
+    joinColumn: { name: 'user_id', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'game_id', referencedColumnName: 'id' },
+  })
+  favorites: Game[];
 }

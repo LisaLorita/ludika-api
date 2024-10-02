@@ -4,8 +4,8 @@ import {
   IsBoolean,
   IsInt,
   IsPositive,
-  IsDate,
   IsEnum,
+  IsDateString,
 } from 'class-validator';
 import { GameGenres } from '../enums/games-genres.enum';
 
@@ -18,7 +18,7 @@ export class CreateGameDto {
   description: string;
   @IsEnum(GameGenres)
   genre: GameGenres;
-  @IsDate()
+  @IsDateString()
   year: Date;
   @IsInt()
   @IsPositive()
