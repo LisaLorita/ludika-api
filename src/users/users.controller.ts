@@ -18,6 +18,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { AddFavoriteDto } from './dto/add-favorite.dto';
 //import { CreateUserDto } from './create-user.dto';
 
 @ApiTags('users')
@@ -65,5 +66,22 @@ export class UsersController {
   @Delete(':id')
   removeUser(@Param('id', ParseUUIDPipe) id: string) {
     return this.usersService.remove(id);
+  }
+
+  @ApiOperation({ summary: 'Delete user by id' })
+  @ApiBadRequestResponse({ status: 400, description: 'Bad Request' })
+  @Get(':userId/favorites')
+  async getUserFavorites(@Param('userId', ParseUUIDPipe) userId: string) {
+    return this.usersService.getUserFavorites(userId);
+  }
+
+  @ApiOperation({ summary: 'Delete user by id' })
+  @ApiBadRequestResponse({ status: 400, description: 'Bad Request' })
+  @Post(':userId/favorites')
+  addFavorite(
+    @Param('userId', ParseUUIDPipe) userId: string,
+    @Body() body: AddFavoriteDto,
+  ) {
+    return this.usersService.addFavorite(userId, body);
   }
 }

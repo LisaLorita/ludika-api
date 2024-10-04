@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { GameGenres } from '../enums/games-genres.enum';
-import { User } from '../../users/entities/user.entity';
+import { GameGenres } from '../games/enums/games-genres.enum';
+import { User } from './user.entity';
 
 @Entity()
 export class Game {
@@ -48,6 +48,6 @@ export class Game {
   })
   updatedAt: Date;
 
-  @ManyToMany(() => User, (user) => user.favorites)
-  user: User[];
+  @ManyToMany(() => User, (user) => user.games)
+  user?: User[];
 }

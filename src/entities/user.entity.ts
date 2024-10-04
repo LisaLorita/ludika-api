@@ -7,10 +7,11 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Game } from '../../games/entities/game.entity';
+import { Game } from './game.entity';
 
 @Entity()
 export class User {
+  [x: string]: any;
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -50,5 +51,5 @@ export class User {
     joinColumn: { name: 'user_id', referencedColumnName: 'id' },
     inverseJoinColumn: { name: 'game_id', referencedColumnName: 'id' },
   })
-  favorites: Game[];
+  games?: Game[];
 }
