@@ -1,9 +1,9 @@
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { GameGenres } from '../games/enums/games-genres.enum';
-import { User } from './user.entity';
+import { UserFavoriteGameEntity } from './user-favorite-game.entity';
 
-@Entity()
-export class Game {
+@Entity('game')
+export class GameEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -48,6 +48,9 @@ export class Game {
   })
   updatedAt: Date;
 
-  @ManyToMany(() => User, (user) => user.games)
-  user?: User[];
+  @OneToMany(
+    () => UserFavoriteGameEntity,
+    (userGameFavorite) => userGameFavorite.game,
+  )
+  favoriteGames: UserFavoriteGameEntity[];
 }

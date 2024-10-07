@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { GamesModule } from './games/games.module';
+import { UsersFavoriteGamesModule } from './users-favorite-games/users-favorite-games.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { GamesModule } from './games/games.module';
     }),
     UsersModule,
     GamesModule,
+    UsersFavoriteGamesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

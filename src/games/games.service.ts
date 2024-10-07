@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Game } from '../entities/game.entity';
+import { GameEntity } from '../entities/game.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateGameDto } from './dto/create-game.dto';
@@ -7,8 +7,8 @@ import { CreateGameDto } from './dto/create-game.dto';
 @Injectable()
 export class GamesService {
   constructor(
-    @InjectRepository(Game)
-    private gamesRepository: Repository<Game>,
+    @InjectRepository(GameEntity)
+    private gamesRepository: Repository<GameEntity>,
   ) {}
 
   findAll() {

@@ -2,16 +2,15 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinTable,
-  ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
+  Relation,
   UpdateDateColumn,
 } from 'typeorm';
-import { Game } from './game.entity';
+import { UserFavoriteGameEntity } from './user-favorite-game.entity';
 
-@Entity()
-export class User {
-  [x: string]: any;
+@Entity('user')
+export class UserEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -45,11 +44,9 @@ export class User {
   updatedAt: Date;
 
   //Relacion tabla favoritos
-  @ManyToMany(() => Game, { cascade: true })
-  @JoinTable({
-    name: 'favorites',
-    joinColumn: { name: 'user_id', referencedColumnName: 'id' },
-    inverseJoinColumn: { name: 'game_id', referencedColumnName: 'id' },
-  })
-  games?: Game[];
+  @OneToMany(
+    () => UserFavoriteGameEntity,
+    (UserGameFavoriteEntity) => UserGameFavoriteEntity.user,
+  )
+  favoriteGames: Relation<UserFavoriteGameEntity[]>;
 }
