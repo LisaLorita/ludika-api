@@ -11,7 +11,7 @@ export class GameEntity {
     nullable: false,
     unique: true,
   })
-  title: string;
+  name: string;
 
   @Column({})
   description: string;

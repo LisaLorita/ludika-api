@@ -1,7 +1,12 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  // BadRequestException,
+  Injectable,
+  // InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateUserDto } from './dto/create-user.dto';
+// import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserEntity } from 'src/entities/user.entity';
 
@@ -19,9 +24,21 @@ export class UsersService {
     if (!user) throw new NotFoundException('User not found');
     return user;
   }
-  async create(dto: CreateUserDto) {
-    return this.usersRepository.save(dto);
-  }
+  // async create(createUserDto: CreateUserDto) {
+  //   try {
+  //     const { password, ...userData } = createUserDto;
+  //     const user = this.usersRepository.create({
+  //       ...userData,
+  //       password: bcrypt.hashSync(password, 10),
+  //     });
+  //     await this.usersRepository.save(user);
+  //     delete user.password; //no retorna pssw
+  //     return user;
+  //     //TODO JWT
+  //   } catch (error) {
+  //     this.handleDBErrors(error);
+  //   }
+  // }
   async update(id: string, dto: UpdateUserDto) {
     const user = await this.usersRepository.preload({
       id: id,

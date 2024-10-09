@@ -1,4 +1,6 @@
 import {
+  BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
@@ -28,8 +30,15 @@ export class UserEntity {
 
   @Column({
     nullable: false,
+    select: false,
   })
   password: string;
+
+  // @Column('text', {
+  //   array: true,
+  //   default: ['user'],
+  // })
+  // roles: string[];
 
   @CreateDateColumn({
     type: 'timestamp',
@@ -49,4 +58,14 @@ export class UserEntity {
     (UserGameFavoriteEntity) => UserGameFavoriteEntity.user,
   )
   favoriteGames: Relation<UserFavoriteGameEntity[]>;
+
+  @BeforeInsert()
+  fieldsBeforeInsertCheck() {
+    this.email = this.email.toLowerCase().trim();
+  }
+
+  @BeforeUpdate()
+  fieldsBeforeUpdateCheck() {
+    this.fieldsBeforeInsertCheck();
+  }
 }

@@ -6,23 +6,25 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { GamesModule } from './games/games.module';
 import { UsersFavoriteGamesModule } from './users-favorite-games/users-favorite-games.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
-      type: 'postgres', // Tipo de base de datos
-      host: 'localhost', // Host de PostgreSQL
-      port: 5432, // Puerto predeterminado de PostgreSQL
-      username: 'admin', // Usuario de PostgreSQL
-      password: 'admin', // Contraseña de PostgreSQL
-      database: 'ludika', // Nombre de la base de datos
-      synchronize: true, // Sincroniza la base de datos con las entidades (no recomendado en producción)
-      autoLoadEntities: true, // Carga las entidades automáticamente
+      type: 'postgres',
+      host: process.env.DB_HOST,
+      port: +process.env.DB_PORT,
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      synchronize: true,
+      autoLoadEntities: true,
     }),
     UsersModule,
     GamesModule,
     UsersFavoriteGamesModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

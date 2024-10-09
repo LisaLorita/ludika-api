@@ -6,10 +6,10 @@ import {
   Param,
   ParseUUIDPipe,
   Patch,
-  Post,
+  // Post,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
+// import { CreateUserDto } from './dto/create-user.dto';
 import {
   ApiBadRequestResponse,
   ApiConflictResponse,
@@ -18,6 +18,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { UpdateUserDto } from './dto/update-user.dto';
+// import { create } from 'domain';
 
 @ApiTags('users')
 @Controller('users')
@@ -36,13 +37,6 @@ export class UsersController {
   @Get(':id')
   getUserById(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.usersService.findById(id);
-  }
-
-  @ApiOperation({ summary: 'Create users' })
-  @ApiBadRequestResponse({ status: 400, description: 'Bad Request' })
-  @Post()
-  createUser(@Body() body: CreateUserDto) {
-    return this.usersService.create(body);
   }
 
   @ApiOperation({ summary: 'Update users' })
