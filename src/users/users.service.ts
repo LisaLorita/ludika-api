@@ -24,22 +24,9 @@ export class UsersService {
     if (!user) throw new NotFoundException('User not found');
     return user;
   }
-  // async create(createUserDto: CreateUserDto) {
-  //   try {
-  //     const { password, ...userData } = createUserDto;
-  //     const user = this.usersRepository.create({
-  //       ...userData,
-  //       password: bcrypt.hashSync(password, 10),
-  //     });
-  //     await this.usersRepository.save(user);
-  //     delete user.password; //no retorna pssw
-  //     return user;
-  //     //TODO JWT
-  //   } catch (error) {
-  //     this.handleDBErrors(error);
-  //   }
-  // }
+
   async update(id: string, dto: UpdateUserDto) {
+    dto.name = dto.name.toUpperCase();
     const user = await this.usersRepository.preload({
       id: id,
       ...dto,

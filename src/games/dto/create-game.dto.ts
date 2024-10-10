@@ -12,7 +12,7 @@ import { GameGenres } from '../enums/games-genres.enum';
 export class CreateGameDto {
   @IsString()
   @IsNotEmpty()
-  title: string;
+  name: string;
   @IsString()
   @IsNotEmpty()
   description: string;

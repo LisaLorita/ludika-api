@@ -20,8 +20,6 @@ import { AuthModule } from './auth/auth.module';
       database: process.env.DB_NAME,
       synchronize: true,
       autoLoadEntities: true,
-
-      //Test
     }),
     UsersModule,
     GamesModule,

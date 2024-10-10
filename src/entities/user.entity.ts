@@ -10,6 +10,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { UserFavoriteGameEntity } from './user-favorite-game.entity';
+import { ValidRoles } from 'src/users/enums/valid-roles. enum';
 
 @Entity('user')
 export class UserEntity {
@@ -34,11 +35,13 @@ export class UserEntity {
   })
   password: string;
 
-  // @Column('text', {
-  //   array: true,
-  //   default: ['user'],
-  // })
-  // roles: string[];
+  @Column({
+    type: 'enum',
+    enum: ValidRoles,
+    array: true,
+    default: ['user'],
+  })
+  roles: string[];
 
   @CreateDateColumn({
     type: 'timestamp',

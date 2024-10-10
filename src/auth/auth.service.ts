@@ -23,6 +23,8 @@ export class AuthService {
 
   async createUser(createUserDto: CreateUserDto) {
     try {
+      createUserDto.email = createUserDto.email.toLowerCase();
+      createUserDto.name = createUserDto.name.toUpperCase();
       const { password, ...userData } = createUserDto;
       const user = this.usersRepository.create({
         ...userData,
@@ -32,19 +34,18 @@ export class AuthService {
       delete user.password; //no retorna pssw
       return {
         ...user, //toma todas las propiedades del usuario
-        token: this.getJwrToken({ email: user.email }), //genera el token
+        token: this.getJwrToken({ id: user.id }), //genera el token
       };
     } catch (error) {
       this.handleDBErrors(error);
     }
   }
-
   async loginUser(loginUserDto: LoginUserDto) {
     const { password, email } = loginUserDto;
     const normalizeEmail = email.toLowerCase();
     const user = await this.usersRepository.findOne({
       where: { email: normalizeEmail },
-      select: { email: true, password: true },
+      select: { email: true, password: true, id: true },
     });
 
     if (!user) {
@@ -56,7 +57,7 @@ export class AuthService {
     }
     return {
       ...user, //toma todas las propiedades del usuario
-      token: this.getJwrToken({ email: user.email }), //genera el token
+      token: this.getJwrToken({ id: user.id }), //genera el token
     };
   }
   //Generar JWT

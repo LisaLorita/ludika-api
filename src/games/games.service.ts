@@ -1,8 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { GameEntity } from '../entities/game.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { CreateGameDto } from './dto/create-game.dto';
+//import { isUUID } from 'class-validator';
 
 @Injectable()
 export class GamesService {
@@ -20,11 +21,20 @@ export class GamesService {
     return game;
   }
 
+  async findByName(name: string): Promise<GameEntity[]> {
+    const games = await this.gamesRepository.find({
+      where: { name: Like(`%${name.toUpperCase()}%`) },
+    });
+    return games;
+  }
+
   async create(dto: CreateGameDto) {
+    dto.name = dto.name.toUpperCase();
     return this.gamesRepository.save(dto);
   }
 
   async update(id: string, dto: CreateGameDto) {
+    dto.name = dto.name.toUpperCase();
     const game = await this.gamesRepository.preload({
       id: id,
       ...dto,

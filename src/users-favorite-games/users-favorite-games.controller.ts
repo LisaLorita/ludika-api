@@ -3,8 +3,10 @@ import { UsersFavoriteGamesService } from './users-favorite-games.service';
 import { CreateUserFavoriteGameDto } from './dto/create-user-favorite-game.dto';
 import { FindUserFavoriteGamesDto } from './dto/find-user-favorite-games.dto';
 import { DeleteUserFavoriteGameDto } from './dto/delete-user-favorite-game.dto';
+import { Auth } from 'src/auth/decorators';
 
-@Controller('users-favorite-games')
+@Controller('favorites')
+@Auth()
 export class UsersFavoriteGamesController {
   constructor(private readonly service: UsersFavoriteGamesService) {}
 
