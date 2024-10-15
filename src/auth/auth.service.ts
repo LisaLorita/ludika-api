@@ -60,6 +60,12 @@ export class AuthService {
       token: this.getJwrToken({ id: user.id }), //genera el token
     };
   }
+  async checkAuthStatus(user: UserEntity) {
+    return {
+      ...user, //toma todas las propiedades del usuario
+      token: this.getJwrToken({ id: user.id }), //genera nuevo JWT Token
+    };
+  }
   //Generar JWT
   private getJwrToken(payload: JwtPayload) {
     const token = this.jwtService.sign(payload);
