@@ -33,7 +33,9 @@ export class AuthService {
       await this.usersRepository.save(user);
       delete user.password; //no retorna pssw
       return {
-        ...user, //toma todas las propiedades del usuario
+        user: {
+          ...user,
+        },
         token: this.getJwrToken({ id: user.id }), //genera el token
       };
     } catch (error) {
@@ -45,7 +47,13 @@ export class AuthService {
     const normalizeEmail = email.toLowerCase();
     const user = await this.usersRepository.findOne({
       where: { email: normalizeEmail },
-      select: { email: true, password: true, id: true },
+      select: {
+        email: true,
+        password: true,
+        id: true,
+        name: true,
+        roles: true,
+      },
     });
 
     if (!user) {
@@ -56,14 +64,18 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
     return {
-      ...user, //toma todas las propiedades del usuario
+      user: {
+        ...user,
+      },
       token: this.getJwrToken({ id: user.id }), //genera el token
     };
   }
   async checkAuthStatus(user: UserEntity) {
     return {
-      ...user, //toma todas las propiedades del usuario
-      token: this.getJwrToken({ id: user.id }), //genera nuevo JWT Token
+      user: {
+        ...user,
+      },
+      token: this.getJwrToken({ id: user.id }), //genera el token
     };
   }
   //Generar JWT

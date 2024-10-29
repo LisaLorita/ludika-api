@@ -67,6 +67,8 @@ export class GamesController {
     return this.gamesService.update(id, body);
   }
 
+  @ApiOperation({ summary: 'Delete games' })
+  @ApiBadRequestResponse({ status: 400, description: 'Bad Request' })
   @Delete(':id')
   @Auth(ValidRoles.ADMIN, ValidRoles.SUPERUSER)
   removeGame(@Param('id', ParseUUIDPipe) id: string) {

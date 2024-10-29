@@ -31,9 +31,4 @@ export class UsersFavoriteGamesController {
   ) {
     return this.service.deleteFavorite(user.id, userFavoriteGameId);
   }
-
-  // @Delete(':userFavoriteGameId')
-  // deleteFavorite(@Param() request: DeleteUserFavoriteGameDto) {
-  //   return this.service.deleteFavorite(request);
-  // }
 }

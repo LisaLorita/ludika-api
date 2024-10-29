@@ -22,15 +22,10 @@ import { JwtStrategy } from './strategies/jwt.strategy';
         return {
           secret: configService.get('JWT_SECRET'),
           signOptions: {
-            expiresIn: 4200,
+            expiresIn: '365d',
           },
         };
       },
-
-      // JwtModule.register({
-      //   secret: process.env.JWT_SECRET,
-      //   signOptions: { expiresIn: 3600 },
-      // }),
     }),
   ],
   exports: [TypeOrmModule, JwtStrategy, PassportModule, JwtModule],

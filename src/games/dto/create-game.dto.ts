@@ -23,6 +23,8 @@ export class CreateGameDto {
   @IsInt()
   @IsPositive()
   players: number;
+  @IsInt()
+  age: number;
   @IsBoolean()
   isDiscontinued: boolean;
 }

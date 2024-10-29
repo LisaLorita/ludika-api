@@ -25,13 +25,11 @@ export class GameEntity {
   @Column()
   players: number;
 
-  // @Column({
-  //   unique: true,
-  // })
-  // photoUrl: string;
-
   @Column()
   year: Date;
+
+  @Column()
+  age: number;
 
   @Column()
   isDiscontinued: boolean;
