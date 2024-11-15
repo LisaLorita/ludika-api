@@ -19,7 +19,7 @@ import {
 } from '@nestjs/swagger';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Auth } from 'src/auth/decorators';
-import { ValidRoles } from './enums/valid-roles. enum';
+import { ValidRoles } from './enums/valid-roles.enum';
 
 @ApiTags('users')
 @Controller('users')

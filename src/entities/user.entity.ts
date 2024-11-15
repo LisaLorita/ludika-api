@@ -10,7 +10,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { UserFavoriteGameEntity } from './user-favorite-game.entity';
-import { ValidRoles } from 'src/users/enums/valid-roles. enum';
+import { ValidRoles } from '../users/enums/valid-roles.enum';
 
 @Entity('user')
 export class UserEntity {
@@ -70,5 +70,17 @@ export class UserEntity {
   @BeforeUpdate()
   fieldsBeforeUpdateCheck() {
     this.fieldsBeforeInsertCheck();
+  }
+
+  constructor(
+    name: string,
+    email: string,
+    password: string,
+    roles: ValidRoles[],
+  ) {
+    this.name = name;
+    this.email = email;
+    this.password = password;
+    this.roles = roles;
   }
 }

@@ -19,7 +19,7 @@ import {
 } from '@nestjs/swagger';
 import { FindGameByNameDto } from './dto/find-game-name.dto';
 import { Auth } from 'src/auth/decorators';
-import { ValidRoles } from 'src/users/enums/valid-roles. enum';
+import { ValidRoles } from 'src/users/enums/valid-roles.enum';
 
 @ApiTags('games')
 @Controller('games')
