@@ -19,7 +19,6 @@ report.xml
 run
 # PROJECT
 npm-debug.log
-package-lock.json
 #artifacts
 artifacts/*
 # exception to the rule
