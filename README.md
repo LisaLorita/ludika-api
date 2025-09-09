@@ -24,7 +24,33 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This project is an API built with NestJS that manages a database of board games.
+
+🔹 Main Features
+
+- Users:
+
+  - Browse available board games.
+
+  - Add games to favorites to create personalized lists.
+
+- Administrators:
+
+  - Add new games to the database.
+
+  - Edit information of existing games.
+
+  - Delete games from the collection.
+
+🔹 Technologies Used
+
+  - NestJS for API development.
+
+  - Relational Database (PostgreSQL).
+
+  - TypeORM for entity management, relationships, and migrations.
+
+  - JWT for user authentication and authorization.
 
 ## Project setup
 
